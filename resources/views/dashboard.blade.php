@@ -24,20 +24,20 @@
             </div> 
         </div> 
     </nav> 
- 
-    <div class="container py-5 text-center"> 
-        <div class="card shadow-lg border-warning rounded-4 p-4 card-glow"> 
-            <h2 class="mb-3 text-uppercase">Selamat Datang, <span class="text-warning fw-bold">{{ session('user') }}</span></h2> 
-            <p class="text-muted">Anda berhasil login ke panel kontrol VIP.</p> 
-            
-            <a href="{{ route('users.index') }}" class="btn btn-warning mt-3 fw-bold text-dark w-50 mx-auto">
-                MASUK KE DATA USER ADMIN
-            </a> 
-            <a href="{{ route('crud.index') }}" class="btn btn-warning mt-3 fw-bold text-dark w-50 mx-auto">
-                MASUK KE DATA MEMBER  VIP
-            </a> 
-        </div> 
-    </div> 
- 
+        @auth
+            <div class="container py-5 text-center"> 
+                <div class="card shadow-lg border-warning rounded-4 p-4 card-glow"> 
+                    <h2 class="mb-3 text-uppercase">Selamat Datang,{{ auth()->user()->name }}! 🎉</h2> 
+                    <p class="text-muted">Anda berhasil login ke panel kontrol VIP.</p> 
+                    
+                    <a href="{{ route('users.index') }}" class="btn btn-warning mt-3 fw-bold text-dark w-50 mx-auto">
+                        MASUK KE DATA USER ADMIN
+                    </a> 
+                    <a href="{{ route('crud.index') }}" class="btn btn-warning mt-3 fw-bold text-dark w-50 mx-auto">
+                        MASUK KE DATA MEMBER  VIP
+                    </a> 
+                </div> 
+            </div> 
+        @endauth
 </body> 
 </html>
