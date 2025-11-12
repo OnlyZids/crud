@@ -31,7 +31,6 @@
             <div class="col-md-8">
                 <div class="card shadow-lg border-warning rounded-4 card-glow">
                     <div class="card-body p-4">
-                        <!-- Judulnya "Edit", dan PAKAI $user -->
                         <h4 class="mb-4 text-warning fw-bold text-uppercase">Edit User Admin: {{ $user->name }}</h4>
                         
                         <form action="{{ route('users.update', $user->id) }}" method="POST">

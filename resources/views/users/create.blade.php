@@ -31,13 +31,8 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="{{ route('dashboard') }}">Home</a></li>
-                    
-                    <!-- Ini link ke CRUD Member (Biodata) -->
                     <li class="nav-item"><a class="nav-link" href="{{ route('crud.index') }}">Data Member</a></li>
-                    
-                    <!-- Ini link ke CRUD User (Tabel Users) -->
                     <li class="nav-item"><a class="nav-link active" href="{{ route('users.index') }}">Manajemen User</a></li>
-                    
                     <li class="nav-item"><a class="nav-link text-danger fw-bold" href="{{ route('logout') }}">LOGOUT</a></li>
                 </ul>
             </div>

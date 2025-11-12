@@ -2,7 +2,7 @@
  
 namespace App\Http\Controllers; 
 use Illuminate\Http\Request; 
-use Illuminate\Support\Facades\Auth; // <-- WAJIB TAMBAH INI
+use Illuminate\Support\Facades\Auth; 
 use Illuminate\Support\Facades\Hash;
  
 class AuthController extends Controller 
@@ -11,10 +11,6 @@ class AuthController extends Controller
     {
         return view('login');
     }
-
-    /**
-     * Ini fungsi yang kita rombak total.
-     */
     public function login(Request $request)
     {
         // 1. Validasi input
@@ -36,7 +32,7 @@ class AuthController extends Controller
     }
     public function dashboard()
     {
-        $user = Auth::user(); // $user->name, $user->username, dll.
+        $user = Auth::user(); 
         
         return view('dashboard', [
             'nama_user' => $user->name // Kirim nama user ke view   
@@ -48,16 +44,13 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        // 1. Panggil fungsi logout
+        // . Panggil fungsi logout
         Auth::logout();
 
-        // 2. Hancurkan session
         $request->session()->invalidate();
-
-        // 3. Bikin token session baru (biar aman)
         $request->session()->regenerateToken();
 
-        // 4. Balik ke login
+        //  Balik ke login
         return redirect()->route('login');
     }
 }

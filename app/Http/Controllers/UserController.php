@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User; // <-- Panggil model User
-use Illuminate\Support\Facades\Hash; // <-- Untuk enkripsi password
-use Illuminate\Support\Facades\Auth; // <-- Untuk cek user yg lagi login
+use App\Models\User; 
+use Illuminate\Support\Facades\Hash; 
+use Illuminate\Support\Facades\Auth; 
 
 class UserController extends Controller
 {
@@ -54,8 +54,6 @@ class UserController extends Controller
     public function edit(string $id)
     {
         $user = User::findOrFail($id);
-        // Nanti kamu perlu bikin view-nya di:
-        // resources/views/users/edit.blade.php
         return view('users.edit', compact('user'));
     }
 
@@ -68,15 +66,10 @@ class UserController extends Controller
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            // 'unique' harus di-handle beda saat update
             'username' => 'required|string|max:255|unique:users,username,' . $user->id,
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'password' => 'nullable|string|min:6|confirmed', // 'nullable' = boleh kosong
         ]);
-
-        // Kita HANYA update password JIKA user mengisinya.
-        // Kalau field password dikosongin, password lama tetap dipakai.
-
         $dataToUpdate = [
             'name' => $validated['name'],
             'username' => $validated['username'],
@@ -86,7 +79,7 @@ class UserController extends Controller
         if ($request->filled('password')) { // Cek apakah field password 
             $dataToUpdate['password'] = Hash::make($validated['password']); // Kalo diisi, hash yg baru
         }
-        // Kalo gak diisi (kosong), kita gak ngapa-ngapain, password lama aman.
+
 
         $user->update($dataToUpdate);
 

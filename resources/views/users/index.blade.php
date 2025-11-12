@@ -14,21 +14,14 @@
     </style>
 </head>
 <body class="bg-black">
-
-    <!-- Navbar kamu -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-warning border-2 shadow-lg">
         <div class="container-fluid">
             <a class="navbar-brand fw-bold text-warning" href="{{ route('dashboard') }}">PLATFORM VIP</a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="{{ route('dashboard') }}">Home</a></li>
-                    
-                    <!-- Ini link ke CRUD Member (Biodata) -->
                     <li class="nav-item"><a class="nav-link" href="{{ route('crud.index') }}">Data Member</a></li>
-                    
-                    <!-- Ini link ke CRUD User (Tabel Users) -->
                     <li class="nav-item"><a class="nav-link active" href="{{ route('users.index') }}">Manajemen User</a></li>
-                    
                     <li class="nav-item"><a class="nav-link text-danger fw-bold" href="{{ route('logout') }}">LOGOUT</a></li>
                 </ul>
             </div>
@@ -65,10 +58,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- 
-                          FIX 1: Ganti $user jadi $users 
-                          FIX 3: Ganti $item['...'] jadi $item->...
-                        -->
                         @forelse ($users as $item) 
                             <tr>
                                 <td>{{ $item->id }}</td>
@@ -77,10 +66,6 @@
                                 <td>{{ $item->email }}</td>
                                 <td>
                                     <a href="{{ route('users.edit', $item->id) }}" class="btn btn-warning btn-sm fw-bold text-dark">Edit</a>
-                                    
-                                    <!-- 
-                                      FIX 2: Tombol Hapus WAJIB pakai form 
-                                    -->
                                     <form action="{{ route('users.destroy', $item->id) }}" method="POST" class="d-inline"
                                           onsubmit="return confirm('Yakin ingin menghapus user ini?')">
                                         @csrf
